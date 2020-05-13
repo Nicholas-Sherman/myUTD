@@ -5,6 +5,9 @@ import Search from './Components/Search';
 function App() {
   return (
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> a868212f6a554444840c7b4c739a3faafadcb8a6
     <div className="Title">
         <h1>
           myUTD
@@ -13,6 +16,7 @@ function App() {
             Tool to find professor reviews and grade distributions.
           </p>
         <Search /> 
+<<<<<<< HEAD
 =======
     <div className="App">
       <header className="App-header">
@@ -23,6 +27,8 @@ function App() {
 
       </header>
 >>>>>>> master
+=======
+>>>>>>> a868212f6a554444840c7b4c739a3faafadcb8a6
     </div>
   );
 }
