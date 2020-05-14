@@ -1,4 +1,4 @@
-.search-bar {
+.crs-no {
     text-align: center;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     border: 1px solid grey;
@@ -11,7 +11,11 @@
     background-color: #f5f5f5;
   }
 
-  .search-bar:hover, .search-bar:focus {
-    border: 1.5px solid #06c258;
+  .crs-no:hover, .crs-no:focus {
+    border: 1.5px solid #009688;
     background-color: white;
+  }
+
+  .crsno label{
+      font-size: 15px;
   }
