@@ -1,0 +1,21 @@
+.crs-no {
+    text-align: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    border: 1px solid grey;
+    border-radius: 5px;
+    height: 30px;
+    margin-top: 5px;
+    width: 35%;
+    padding: 3px 23px 3px 30px;
+    outline: 0;
+    background-color: #f5f5f5;
+  }
+
+  .crs-no:hover, .crs-no:focus {
+    border: 1.5px solid #009688;
+    background-color: white;
+  }
+
+  .crsno label{
+      font-size: 15px;
+  }
