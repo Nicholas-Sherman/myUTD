@@ -15,7 +15,7 @@
     "react-dom": "^16.13.1",
     "react-native-elements": "^2.0.0",
     "react-scripts": "3.4.1",
-    "typescript": "^3.9.2"
+    "typescript": "^3.9.3"
   },
   "scripts": {
     "start": "react-scripts start",
