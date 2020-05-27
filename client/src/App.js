@@ -2,6 +2,9 @@ import React from 'react';
 import './App.css';
 import Search from './Components/Search';
 import Piechart from './Components/Piechart';
+import Ratings from './Components/Review/Ratings';
+import Tags from './Components/Review/Tags';
+
 class App extends React.Component{
   constructor(props){
     super(props);
@@ -10,10 +13,10 @@ class App extends React.Component{
 callAPI(){
   fetch("http://localhost:9000/testapi")
   .then(res => res.json())
-  .then(res => this.setState({Ap: res[7].Ap,A: res[7].A,Am: res[7].Am,
-                              Bp: res[7].Bp,B:res[7].B, Bm: res[7].Bm,
-                              Cp: res[7].Cp,C: res[7].C,Cm: res[7].Cm,
-                              Dp: res[7].Dp, D: res[7].D,W: res[7].W_Total,F: res[7].F}));
+  .then(res => this.setState({Ap: res.Ap,A: res.A,Am: res.Am,
+                              Bp: res.Bp,B:res.B, Bm: res.Bm,
+                              Cp: res.Cp,C: res.C,Cm: res.Cm,
+                              Dp: res.Dp, D: res.D,W: res.W,F: res.F}));
 }
   componentWillMount(){
     this.callAPI();
@@ -27,7 +30,15 @@ callAPI(){
           <p>
             Tool to find professor reviews and grade distributions.
           </p>
-        <Search /> 
+        <Search /> <br></br>
+        <h3>
+          Rate out of 5
+        </h3>
+        <Ratings />
+        <h3>
+          Select up to 5 tags that describe your professor
+        </h3>
+        <Tags />
         <Piechart professor="henry" Ap = {this.state.Ap} A = {this.state.A} Am = {this.state.Am} 
                                     Bp = {this.state.Bp} B = {this.state.B} Bm = {this.state.Bm} 
                                     Cp = {this.state.Cp} C = {this.state.C} Cm = {this.state.Cm} 
