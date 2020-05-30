@@ -1,11 +1,7 @@
 import React from 'react';
 import './App.css';
-import Search from './Components/Search';
-<<<<<<< HEAD
-import Page from './Components/Review/Page';
-=======
+import Rmp from './Components/Review/Rmp';
 import Piechart from './Components/Piechart';
->>>>>>> 2a5265ff8b6ac61a4c16eadba7357c846c060c42
 
 class App extends React.Component{
   constructor(props){
@@ -32,17 +28,11 @@ callAPI(){
           <p>
             Tool to find professor reviews and grade distributions.
           </p>
-        <Search /> <br></br>
-<<<<<<< HEAD
-        <h3>
-          Rate out of 5
-        </h3>
-=======
+        <Rmp /> <br></br>
         <Piechart professor="henry" Ap = {this.state.Ap} A = {this.state.A} Am = {this.state.Am} 
                                     Bp = {this.state.Bp} B = {this.state.B} Bm = {this.state.Bm} 
                                     Cp = {this.state.Cp} C = {this.state.C} Cm = {this.state.Cm} 
-                                    Dp = {this.state.Dp} D = {this.state.D} F = {this.state.F} W = {this.state.W} />     
->>>>>>> 2a5265ff8b6ac61a4c16eadba7357c846c060c42
+                                    Dp = {this.state.Dp} D = {this.state.D} F = {this.state.F} W = {this.state.W} />
     </div>
   );
   }
