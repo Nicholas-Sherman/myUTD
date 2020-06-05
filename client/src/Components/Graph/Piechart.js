@@ -7,7 +7,7 @@ var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 class Piechart extends Component {
   constructor(props) {
     super(props);
-	this.state = {professor: props.professor}
+	this.state = {professor: props.professor, show: false}
   }
   callAPI(){
 	fetch("http://localhost:9000/testapi")
@@ -17,8 +17,15 @@ class Piechart extends Component {
 								Cp: res.Cp,C: res.C,Cm: res.Cm,
 								Dp: res.Dp, D: res.D,W: res.W,F: res.F}));
   }
-	componentWillMount(){
-	  this.callAPI();
+	async componentDidMount(){
+	 //this.callAPI();
+	const response = await fetch("http://localhost:9000/testapi");
+	const json = await response.json();
+	this.setState({Ap: json.Ap,A: json.A,Am: json.Am,
+		Bp: json.Bp,B:json.B, Bm: json.Bm,
+		Cp: json.Cp,C: json.C,Cm: json.Cm,
+		Dp: json.Dp, D: json.D,W: json.W,F: json.F, show: true});
+		
 	}
   
 	render() {
@@ -27,7 +34,7 @@ class Piechart extends Component {
 				interval: 1,
 			  },
 			title: {
-				text: "Basic Column Chart"
+				text: this.state.professor
 			},
 			data: [{
 
@@ -54,10 +61,12 @@ class Piechart extends Component {
 		}
 		return (
 		<div>
-			<CanvasJSChart options = {options}
-				/* onRef={ref => this.chart = ref} */
-			/>
-			{/*You can get reference to the chart instance as shown above using onRef. This allows you to access all chart properties and methods*/}
+			 <CanvasJSChart options = {options}
+				onRef={ref => this.chart = ref} />
+			
+			{/*You can get reference to the chart instance as shown above using onRef. This allows you to access all chart properties and methods*/
+			
+			}
 		</div>
 		);
 	}
