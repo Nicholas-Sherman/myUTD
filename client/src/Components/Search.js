@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './Search.css';
 import Piechart from './Graph/Piechart';
+import axios from 'axios';
 
 class Search extends Component {
   constructor(props) {
@@ -11,35 +12,9 @@ class Search extends Component {
     this.myRef = React.createRef();
   }
   handleClick = async () => {
-    const response = await fetch('http://localhost:9000/testapi', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        name: this.state.input
-      })
-    });
+    axios.post('http://localhost:9000/testapi',{name: this.state.input})
     this.setState({name: this.state.input})
   }
- /* handleClick(event)
-  {
-    fetch('http://localhost:9000/testapi', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        name: this.state.input
-      })
-    })
-    .then(res => res.json())
-    .then(data => console.log(data))
-    .catch(err => console.log(err));
-    this.setState({name: this.state.input})
-  }*/
 
   handleChange(event)
   {

@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.css';
 import Search from './Components/Search';
-import Piechart from './Components/Graph/Piechart';
 import Ratings from './Components/Review/Ratings';
 import Tags from './Components/Review/Tags';
 

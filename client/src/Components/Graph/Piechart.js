@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import CanvasJSReact from './canvasjs.react';
+import axios from 'axios';
 //var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
@@ -9,25 +10,17 @@ class Piechart extends Component {
     super(props);
 	this.state = {professor: props.professor, show: false}
   }
-  callAPI(){
-	fetch("http://localhost:9000/testapi")
-	.then(res => res.json())
-	.then(res => this.setState({Ap: res.Ap,A: res.A,Am: res.Am,
-								Bp: res.Bp,B:res.B, Bm: res.Bm,
-								Cp: res.Cp,C: res.C,Cm: res.Cm,
-								Dp: res.Dp, D: res.D,W: res.W,F: res.F}));
-  }
-	async componentDidMount(){
-	 //this.callAPI();
-	const response = await fetch("http://localhost:9000/testapi");
-	const json = await response.json();
-	this.setState({Ap: json.Ap,A: json.A,Am: json.Am,
-		Bp: json.Bp,B:json.B, Bm: json.Bm,
-		Cp: json.Cp,C: json.C,Cm: json.Cm,
-		Dp: json.Dp, D: json.D,W: json.W,F: json.F, show: true});
-		
-	}
   
+	async componentDidMount(){
+		axios.get(`http://localhost:9000/testapi`)
+		.then(res => {
+			const json = res.data;
+			this.setState({Ap: json.Ap,A: json.A,Am: json.Am,
+				Bp: json.Bp,B:json.B, Bm: json.Bm,
+				Cp: json.Cp,C: json.C,Cm: json.Cm,
+				Dp: json.Dp, D: json.D,W: json.W,F: json.F, show: true});
+		})
+	};
 	render() {
 		const options = {
 			axisX:{
