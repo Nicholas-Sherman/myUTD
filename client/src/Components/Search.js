@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import './Search.css';
-import Piechart from './Graph/Piechart';
 import axios from 'axios';
 
 class Search extends Component {
@@ -36,7 +35,8 @@ class Search extends Component {
         </label>
     <input type="submit"  value="Submit" />
     </form>
-    <Piechart professor={this.state.name}/>
+
+
       </div>
     );
     

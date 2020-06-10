@@ -1,23 +1,25 @@
 var express =require("express");
 var router= express.Router();
 var mysql = require('mysql');
-const app = express();
-const spawn = require("child_process").spawn;
+const { promisify } = require('util')
+const sleep = promisify(setTimeout)
+//const app = express();
+//const spawn = require("child_process").spawn;
 
 /*const pythonProcess = spawn('python',["./RMPClass.py", 'Bing Lv'])
 pythonProcess.stdout.on('data', (data) => {
     console.log(data.toString());
 });*/
- 
-let total = {Ap: 0,A: 0,Am: 0,Bp: 0,B: 0,Bm: 0,Cp: 0,C: 0,Cm: 0,Dp: 0,D: 0,Dm: 0,F: 0,W_total: 0}
 
 router.post('/', (req, res) => {
-   var postData  = req.body.name;
+    var seasons = ["fall","spring"]
+    var years = ["2017", "2018", "2019" ];
+    global.total = [{Ap: 0,A: 0,Am: 0,Bp: 0,B: 0,Bm: 0,Cp: 0,C: 0,Cm: 0,Dp: 0,D: 0,Dm: 0,F: 0,W: 0},{Ap: 0,A: 0,Am: 0,Bp: 0,B: 0,Bm: 0,Cp: 0,C: 0,Cm: 0,Dp: 0,D: 0,Dm: 0,F: 0,W: 0},{Ap: 0,A: 0,Am: 0,Bp: 0,B: 0,Bm: 0,Cp: 0,C: 0,Cm: 0,Dp: 0,D: 0,Dm: 0,F: 0,W: 0}]
+    var postData  = req.body.name;
     var nameS = postData.split(" ");
     firstN = nameS[0]
     lastN = nameS[1]
-    console.log(firstN)
-    console.log(lastN)
+
 
 
 const connection = mysql.createConnection({
@@ -30,50 +32,97 @@ connection.connect(function(error){
     if(error){
         throw error;
     }
-    else{
-        console.log('Connected');
-    }
 });
-function totalfun(b)
+function totalfun(item,j)
 {
-    for(let item of b){
-       total.Ap += item.Ap
-        total.A += item.A
-        total.Am += item.Am
-        total.Bp += item.Bp
-        total.B += item.B
-        total.Bm += item.Bm
-        total.Cp += item.Cp
-        total.C += item.C
-        total.Cm += item.Cm
-        total.Dp += item.Dp
-        total.D += item.D
-        total.Dm += item.Dm
-        total.F += item.F
-        total.W += item.W_Total
-    }
-    return total
-}
-var fall = "fall"
-var years = ["2017", "2018", "2019"];
-total = {Ap: 0,A: 0,Am: 0,Bp: 0,B: 0,Bm: 0,Cp: 0,C: 0,Cm: 0,Dp: 0,D: 0,Dm: 0,F: 0,W: 0}
-for(i = 0; i < years.length; i++)
-{
-connection.query("SELECT `Ap`,`A`,`Am`,`Bp`,`B`,`Bm`,`Cp`,`C`,`Cm`,`Dp`,`D`,`Dm`,`F`,`W_Total` FROM " + fall + "."+ years[i] +" WHERE LOCATE('" +lastN+ ", " +firstN+ "', Instructor_1)>0" , function(error,results) {
-    if(error)
-    {
-     console.log(error);
-    }
-   else{
-    console.log(total)
-    total =totalfun(results)
-    }
-});
+    console.log(item.Ap)
+        total[j].Ap += item.Ap
+        total[j].A += item.A
+        total[j].Am += item.Am
+        total[j].Bp += item.Bp
+        total[j].B += item.B
+        total[j].Bm += item.Bm
+        total[j].Cp += item.Cp
+        total[j].C += item.C
+        total[j].Cm += item.Cm
+        total[j].Dp += item.Dp
+        total[j].D += item.D
+        total[j].Dm += item.Dm
+        total[j].F += item.F
+        total[j].W += item.W_Total
 }
 
+//for(j = 0; j < seasons.length; j++)
+//{  
+    j=0
+    for(i = 0; i < years.length; i++)
+    {
+    if(!(years[i] == 2017))
+        {
+        connection.query("SELECT `Ap`,`A`,`Am`,`Bp`,`B`,`Bm`,`Cp`,`C`,`Cm`,`Dp`,`D`,`Dm`,`F`,`W_Total` FROM fall."+ years[i] +" WHERE LOCATE('" +lastN+ ", " +firstN+ "', Instructor_1)>0" , function(error,results) {
+            if(!error){
+                for(k = 0; k < results.length; k++)
+                {
+                totalfun(results[k],0)
+                }
+            }
+            else
+            {
+               // console.log(error)
+            }
+        });
+        }
+    }
+//}
+    sleep(50).then(() => {
+        j=1
+        for(i = 0; i < years.length; i++)
+        {
+        if(!(years[i] == 2017))
+            {
+            connection.query("SELECT `Ap`,`A`,`Am`,`Bp`,`B`,`Bm`,`Cp`,`C`,`Cm`,`Dp`,`D`,`Dm`,`F`,`W_Total` FROM spring."+ years[i] +" WHERE LOCATE('" +lastN+ ", " +firstN+ "', Instructor_1)>0" , function(error,results) {
+                if(!error){
+                    for(k = 0; k < results.length; k++)
+                    {
+                    totalfun(results[k],1)
+                    }
+                }
+                else
+                {
+                    //console.log(error)
+                }
+            });
+            }
+        }
+    })
+    sleep(50).then(() => {
+        j=2
+        for(i = 0; i < years.length; i++)
+        {
+        if(!(years[i] == 2017 && (seasons[j] == "spring" || seasons[j] == "summer")))
+            {
+            connection.query("SELECT `Ap`,`A`,`Am`,`Bp`,`B`,`Bm`,`Cp`,`C`,`Cm`,`Dp`,`D`,`Dm`,`F`,`W_Total` FROM summer."+ years[i] +" WHERE LOCATE('" +lastN+ ", " +firstN+ "', Instructor_1)>0" , function(error,results) {
+                if(!error){
+                    for(k = 0; k < results.length; k++)
+                    {
+                    totalfun(results[k],2)
+                    }
+                }
+                else
+                {
+                    //console.log(error)
+                }
+            });
+            }
+        }
+    })
 });
+
 router.get('/', (req,res,next) => {
-        res.send(total)
+    sleep(1000).then(() => {
+           res.send(total)
+
+    })
              
 });
 
