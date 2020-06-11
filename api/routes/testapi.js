@@ -52,8 +52,7 @@ function totalfun(item,j)
         total[j].W += item.W_Total
 }
 
-//for(j = 0; j < seasons.length; j++)
-//{  
+
     j=0
     for(i = 0; i < years.length; i++)
     {
@@ -73,7 +72,6 @@ function totalfun(item,j)
         });
         }
     }
-//}
     sleep(50).then(() => {
         j=1
         for(i = 0; i < years.length; i++)

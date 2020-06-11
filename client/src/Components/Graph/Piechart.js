@@ -21,7 +21,6 @@ class Piechart extends Component {
 			const fall = temp[0];
 			const spring = temp[1];
 			const summer = temp[2];
-			console.log(fall,spring,summer)
 			//sets state for fall
 			this.setState({fallAp: fall.Ap,fallA: fall.A,fallAm: fall.Am,
 				fallBp: fall.Bp,fallB:fall.B, fallBm: fall.Bm,

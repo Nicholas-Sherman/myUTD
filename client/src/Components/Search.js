@@ -12,6 +12,7 @@ class Search extends Component {
   }
   handleClick = async () => {
     axios.post('http://localhost:9000/testapi',{name: this.state.input})
+    axios.post('http://localhost:9000/professorsList',{input: this.state.input})
     this.setState({name: this.state.input})
   }
 
