@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import './Search.css';
-import Piechart from './Graph/Piechart';
 import axios from 'axios';
 
 class Search extends Component {
@@ -14,8 +13,7 @@ class Search extends Component {
   handleClick = async (e) => {
     e.preventDefault();
     axios.post('http://localhost:9000/testapi',{name: this.state.input})
-    this.props.handleInput(this.state);
-    this.setState({name: this.state.input})
+    axios.post('http://localhost:9000/data',{name: this.state.input})
   }
 
   handleChange(event)

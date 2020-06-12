@@ -5,22 +5,23 @@ import axios from 'axios';
 class Rmp extends Component {
     constructor(props) {
         super(props);
-        this.state = {prof: '', tid:''};
-        this.handleInput = this.handleInput.bind(this);
+        this.state = {tid:''};
     }
     
-    handleInput(input) {
-        this.setState({prof: input});
-        axios.post('http://localhost:9000/name', {professor: this.prof})
-        .then (function(response) {
-            console.log(response)
-        })
-    }
+// async componentDidMount(){
+//     axios.get(`http://localhost:9000/data`)
+//     .then(res => {
+//         console.log(res.data)
+//         const json = res.data;
+//         this.setState({tid: json.tid, show: true});
+//         console.log(tid)
+//     })
+// }
 
     render() {       
         return (
             <div className = "RMP">
-                <Search handleInput={this.handleInput}/>
+               
             </div>
         )
     }

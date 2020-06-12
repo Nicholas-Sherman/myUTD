@@ -24,8 +24,7 @@ class RateMyProfScraper:
 
         def createList(self,thingi):
             page = requests.get("http://www.ratemyprofessors.com/filter/professor/?&page=" + str(
-                thingi) + "&filter=teacherlastname_sort_s+asc&query=*%3A*&queryoption=TEACHER&queryBy=schoolId&sid=" + str(
-                self.UniversityId))
+                thingi) + "&filter=teacherlastname_sort_s+asc&query=*%3A*&queryoption=TEACHER&queryBy=schoolId&sid=1273")
             temp_jsonpage = json.loads(page.content)
             temp_list = temp_jsonpage['professors']
             self.professorlist.extend(temp_list)
@@ -33,22 +32,22 @@ class RateMyProfScraper:
         def GetNumOfProfessors(self,id):  # function returns the number of professors in the university of the given ID.
             
             page = requests.get(
-                "http://www.ratemyprofessors.com/filter/professor/?&page=1&filter=teacherlastname_sort_s+asc&query=*%3A*&queryoption=TEACHER&queryBy=schoolId&sid=" + str(
-                    id))  # get request for page
+                "http://www.ratemyprofessors.com/filter/professor/?&page=1&filter=teacherlastname_sort_s+asc&query=*%3A*&queryoption=TEACHER&queryBy=schoolId&sid=1273") 
             temp_jsonpage = json.loads(page.content)
             num_of_prof = temp_jsonpage[
-                              'remaining'] + 20  # get the number of professors at William Paterson University
+                              'remaining'] + 20 
             return num_of_prof
 
         def SearchProfessor(self, ProfessorName):
             self.indexnumber = self.GetProfessorIndex(ProfessorName)
-            self.PrintProfessorInfo()
+            self.PrintProfessorDetail('tid')
             return self.indexnumber
 
         def GetProfessorIndex(self,ProfessorName):  # function searches for professor in list
             for i in range(0, len(self.professorlist)):
                 if (ProfessorName == (self.professorlist[i]['tFname'] + " " + self.professorlist[i]['tLname'])):
                     return i
+            print("prof not found")
             return False  # Return False is not found
 
         def PrintProfessorInfo(self):  # print search professor's name and RMP score

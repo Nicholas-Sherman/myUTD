@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import Rmp from './Components/Rmp';
+import Search from './Components/Search';
 
 
 class App extends React.Component{
@@ -18,7 +18,7 @@ class App extends React.Component{
           <p>
             Tool to find professor reviews and grade distributions.
           </p>
-        <Rmp /> <br></br>
+        <Search /> <br></br>
     </div>
   );
   }

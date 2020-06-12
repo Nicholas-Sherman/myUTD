@@ -2,7 +2,6 @@ var express =require("express");
 var router= express.Router();
 var mysql = require('mysql');
 const app = express();
-const spawn = require("child_process").spawn;
 
 let total = {Ap: 0,A: 0,Am: 0,Bp: 0,B: 0,Bm: 0,Cp: 0,C: 0,Cm: 0,Dp: 0,D: 0,Dm: 0,F: 0,W_total: 0}
 
