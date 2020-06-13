@@ -1,12 +1,8 @@
 import React from 'react';
 import './App.css';
 import Search from './Components/Search';
-
-import Ratings from './Components/Review/Ratings';
-import Tags from './Components/Review/Tags';
-
-import Piechart from './Components/Piechart';
-
+import Piechart from './Components/Graph/Piechart';
+import DropdownList from './Components/DropdownList';
 
 class App extends React.Component{
   constructor(props){
@@ -24,6 +20,9 @@ class App extends React.Component{
             Tool to find professor reviews and grade distributions.
           </p>
         <Search /> <br></br>
+        <DropdownList />
+        <Piechart />
+
     </div>
   );
   }
