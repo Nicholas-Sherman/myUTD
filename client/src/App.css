@@ -1,10 +1,9 @@
 .Title {
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-size:22px;
+  font-family: Verdana, Tahoma, sans-serif;
   text-align: center;
   letter-spacing: 2px;
   margin: 0 auto;
-  padding: 280px;
+  padding: 260px;
 }
 
 .h1 {
@@ -16,4 +15,12 @@
   padding-top: 3px;
   padding-bottom: 3px;
 }
+
+.popup {
+  position: absolute;
+  margin: 0;
+  right:685px;
+  padding: 10px;
+}
+
 

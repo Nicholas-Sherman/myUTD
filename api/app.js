@@ -7,9 +7,11 @@ var cors=require('cors');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var testAPIRouter = require("./routes/testapi");
+
+var testAPIRouter = require('./routes/testapi');
+var dataRouter = require('./routes/data');
 var listAPIRouter = require("./routes/professorsList");
-//var nameRouter = require('./routes/name');
+
 var app = express();
 
 // view engine setup
@@ -26,8 +28,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/testapi',testAPIRouter);
+app.use('/data',dataRouter);
 app.use('/professorsList',listAPIRouter);
-//app.use('/name',nameRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

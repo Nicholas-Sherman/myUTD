@@ -1,15 +1,9 @@
 var express =require("express");
 var router= express.Router();
 var mysql = require('mysql');
+
 const { promisify } = require('util')
 const sleep = promisify(setTimeout)
-//const app = express();
-//const spawn = require("child_process").spawn;
-
-/*const pythonProcess = spawn('python',["./RMPClass.py", 'Bing Lv'])
-pythonProcess.stdout.on('data', (data) => {
-    console.log(data.toString());
-});*/
 
 router.post('/', (req, res) => {
     var seasons = ["fall","spring"]
