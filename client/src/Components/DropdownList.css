@@ -1,0 +1,6 @@
+.scroll {
+    overflow-y:auto;
+    vertical-align: middle;
+    width:200px;
+    height:500px;
+}

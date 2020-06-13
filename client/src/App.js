@@ -2,6 +2,9 @@ import React from 'react';
 import './App.css';
 import Search from './Components/Search';
 import Rmp from './Components/Rmp'
+import Piechart from './Components/Graph/Piechart';
+import DropdownList from './Components/DropdownList';
+
 
 class App extends React.Component{
   constructor(props){
@@ -27,6 +30,8 @@ class App extends React.Component{
         <div className= "Popup">
           <Rmp tid={this.state.tid}/>
         </div>
+        <DropdownList />
+        <Piechart />
     </div>
   );
   }
