@@ -1,26 +1,31 @@
 import React, { Component } from 'react'
-import Search from './Search'
 import axios from 'axios';
+import Iframe from 'react-iframe'
+import Popup from 'reactjs-popup'
+import Search from './Search'
 
 class Rmp extends Component {
     constructor(props) {
         super(props);
-        this.state = {tid:''};
+        this.state = {tid: ''};
     }
     
-// async componentDidMount(){
-//     axios.get(`http://localhost:9000/data`)
-//     .then(res => {
-//         console.log(res.data)
-//         const json = res.data;
-//         this.setState({tid: json.tid, show: true});
-//         console.log(tid)
-//     })
-// }
 
     render() {       
         return (
-            <div className = "RMP">
+            <div className = "rmp">
+            <Popup trigger={<button className ="popup">Rate My Professor</button>}
+             position="right">
+                 <div className = "rmp-button">
+                    <Iframe
+                    url = {"https://www.ratemyprofessors.com/ShowRatings.jsp?tid=" + this.state.tid}
+                    height = "800px"
+                    width = "670px"
+                    position = "relative"
+                    className = "rmp-frame">
+                    </Iframe>
+                 </div>
+             </Popup>
                
             </div>
         )

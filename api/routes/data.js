@@ -2,34 +2,29 @@ const {PythonShell} = require('python-shell')
 const express = require("express");
 const app = express();
 const router = express.Router();
+const { promisify } = require('util')
+const sleep = promisify(setTimeout)
 
-let tid = ''
-router.post('/', (req, res) => {  
+router.post('/', function (req, res) {
+  let tid = "";
+  const { name } = req.body;
+  console.log(name)
 
-  let prof = req.body.name;
-  console.log("post: ",prof)
+  const options = {
+    mode: 'text',
+    pythonOptions: ['-u'],
+    scriptPath: './helpers',
+    args: [name],
+  };
 
- let options = {
-      mode :'text',
-      pythonOptions: ['-u'], 
-      scriptPath: './helpers',
-      args: [prof]
-  }
-
-  
-  PythonShell.run('RMPClass.py', options , function (err, results) {
-      if (err) throw err;     
-      tid = results
-    })
-
-  console.log("py: ", tid)
-})
-
- router.get('/', (req,res,next) => {
-    console.log("get: " ,tid);
+  PythonShell.run('RMPClass.py', options, (err, results) => {
+    if (err) throw err;
+    tid = results;
+    console.log("py: ", tid)
     res.send(tid)
- })
+   });
 
+});
 
 
   module.exports=router;

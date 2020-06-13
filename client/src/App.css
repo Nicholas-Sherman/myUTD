@@ -16,5 +16,11 @@
   padding-bottom: 3px;
 }
 
+.popup {
+  position: absolute;
+  margin: 0;
+  right:685px;
+  padding: 10px;
+}
 
 
