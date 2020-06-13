@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
-import axios from 'axios';
 import Iframe from 'react-iframe'
 import Popup from 'reactjs-popup'
-import Search from './Search'
 
 class Rmp extends Component {
     constructor(props) {
@@ -10,6 +8,11 @@ class Rmp extends Component {
         this.state = {tid: ''};
     }
     
+componentDidUpdate(prevProps) {
+    if (this.props.tid !== prevProps.tid) {
+        this.setState({tid: this.props.tid})
+    }
+}
 
     render() {       
         return (
@@ -26,7 +29,6 @@ class Rmp extends Component {
                     </Iframe>
                  </div>
              </Popup>
-               
             </div>
         )
     }
