@@ -11,8 +11,8 @@ class Search extends Component {
     this.myRef = React.createRef();
   }
   handleClick = async () => {
-    axios.post('http://localhost:9000/testapi',{name: this.state.input})
     axios.post('http://localhost:9000/professorsList',{input: this.state.input})
+   axios.delete('http://localhost:9000/testapi')
     this.setState({name: this.state.input})
   }
 

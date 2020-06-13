@@ -15,10 +15,13 @@ router.post('/', (req, res) => {
     var seasons = ["fall","spring"]
     var years = ["2017", "2018", "2019" ];
     global.total = [{Ap: 0,A: 0,Am: 0,Bp: 0,B: 0,Bm: 0,Cp: 0,C: 0,Cm: 0,Dp: 0,D: 0,Dm: 0,F: 0,W: 0},{Ap: 0,A: 0,Am: 0,Bp: 0,B: 0,Bm: 0,Cp: 0,C: 0,Cm: 0,Dp: 0,D: 0,Dm: 0,F: 0,W: 0},{Ap: 0,A: 0,Am: 0,Bp: 0,B: 0,Bm: 0,Cp: 0,C: 0,Cm: 0,Dp: 0,D: 0,Dm: 0,F: 0,W: 0}]
+    console.log(req.body)
     var postData  = req.body.name;
-    var nameS = postData.split(" ");
+    var cat = req.body.cat;
+    var sub = req.body.sub;
+   /* var nameS = postData.split(" ");
     firstN = nameS[0]
-    lastN = nameS[1]
+    lastN = nameS[1]*/
 
 
 
@@ -35,7 +38,6 @@ connection.connect(function(error){
 });
 function totalfun(item,j)
 {
-    console.log(item.Ap)
         total[j].Ap += item.Ap
         total[j].A += item.A
         total[j].Am += item.Am
@@ -52,13 +54,10 @@ function totalfun(item,j)
         total[j].W += item.W_Total
 }
 
-
-    j=0
     for(i = 0; i < years.length; i++)
     {
-    if(!(years[i] == 2017))
-        {
-        connection.query("SELECT `Ap`,`A`,`Am`,`Bp`,`B`,`Bm`,`Cp`,`C`,`Cm`,`Dp`,`D`,`Dm`,`F`,`W_Total` FROM fall."+ years[i] +" WHERE LOCATE('" +lastN+ ", " +firstN+ "', Instructor_1)>0" , function(error,results) {
+
+        connection.query("SELECT `Ap`,`A`,`Am`,`Bp`,`B`,`Bm`,`Cp`,`C`,`Cm`,`Dp`,`D`,`Dm`,`F`,`W_Total` FROM fall."+ years[i] +" WHERE( LOCATE('" +postData+ "', Instructor_1)>0 AND `Subject` = '" + sub + "' AND `Catalog_Nbr` = '" + cat + "');" , function(error,results) {
             if(!error){
                 for(k = 0; k < results.length; k++)
                 {
@@ -67,18 +66,15 @@ function totalfun(item,j)
             }
             else
             {
-               // console.log(error)
+               console.log(error)
             }
         });
-        }
+        
     }
     sleep(50).then(() => {
-        j=1
-        for(i = 0; i < years.length; i++)
+        for(i = 1; i < years.length; i++)
         {
-        if(!(years[i] == 2017))
-            {
-            connection.query("SELECT `Ap`,`A`,`Am`,`Bp`,`B`,`Bm`,`Cp`,`C`,`Cm`,`Dp`,`D`,`Dm`,`F`,`W_Total` FROM spring."+ years[i] +" WHERE LOCATE('" +lastN+ ", " +firstN+ "', Instructor_1)>0" , function(error,results) {
+            connection.query("SELECT `Ap`,`A`,`Am`,`Bp`,`B`,`Bm`,`Cp`,`C`,`Cm`,`Dp`,`D`,`Dm`,`F`,`W_Total` FROM spring."+ years[i] +" WHERE( LOCATE('" +postData+ "', Instructor_1)>0 AND `Subject` = '" + sub + "' AND `Catalog_Nbr` = '" + cat + "');" , function(error,results) {
                 if(!error){
                     for(k = 0; k < results.length; k++)
                     {
@@ -87,19 +83,16 @@ function totalfun(item,j)
                 }
                 else
                 {
-                    //console.log(error)
+                    console.log(error)
                 }
             });
-            }
+            
         }
     })
     sleep(50).then(() => {
-        j=2
-        for(i = 0; i < years.length; i++)
+        for(i = 1; i < years.length; i++)
         {
-        if(!(years[i] == 2017 && (seasons[j] == "spring" || seasons[j] == "summer")))
-            {
-            connection.query("SELECT `Ap`,`A`,`Am`,`Bp`,`B`,`Bm`,`Cp`,`C`,`Cm`,`Dp`,`D`,`Dm`,`F`,`W_Total` FROM summer."+ years[i] +" WHERE LOCATE('" +lastN+ ", " +firstN+ "', Instructor_1)>0" , function(error,results) {
+            connection.query("SELECT `Ap`,`A`,`Am`,`Bp`,`B`,`Bm`,`Cp`,`C`,`Cm`,`Dp`,`D`,`Dm`,`F`,`W_Total` FROM summer."+ years[i] +" WHERE( LOCATE('" +postData+ "', Instructor_1)>0 AND `Subject` = '" + sub + "' AND `Catalog_Nbr` = '" + cat + "');" , function(error,results) {
                 if(!error){
                     for(k = 0; k < results.length; k++)
                     {
@@ -108,10 +101,10 @@ function totalfun(item,j)
                 }
                 else
                 {
-                    //console.log(error)
+                    console.log(error)
                 }
             });
-            }
+            
         }
     })
 });
@@ -123,7 +116,10 @@ router.get('/', (req,res,next) => {
     })
              
 });
-
+router.delete('/', (req,res,next) => {
+    global.total = [{Ap: 0,A: 0,Am: 0,Bp: 0,B: 0,Bm: 0,Cp: 0,C: 0,Cm: 0,Dp: 0,D: 0,Dm: 0,F: 0,W: 0},{Ap: 0,A: 0,Am: 0,Bp: 0,B: 0,Bm: 0,Cp: 0,C: 0,Cm: 0,Dp: 0,D: 0,Dm: 0,F: 0,W: 0},{Ap: 0,A: 0,Am: 0,Bp: 0,B: 0,Bm: 0,Cp: 0,C: 0,Cm: 0,Dp: 0,D: 0,Dm: 0,F: 0,W: 0}]
+    res.send(total);
+})
 
 
 module.exports=router;

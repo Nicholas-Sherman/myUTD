@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import CanvasJSReact from './canvasjs.react';
 import axios from 'axios';
-//var CanvasJS = CanvasJSReact.CanvasJS;
+var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 
@@ -43,7 +43,13 @@ class Piechart extends Component {
 	};
 
 	render() {
+		CanvasJS.addColorSet("custom",["#006400","#008000","#6B8E23","#2E8B57","#3CB371", "#98FB98",
+										"#E4FF7F","#FFA07A","#FA8072","#F08080","#DC143C","#FF0000","#800000",
+										])
 		const optionsFall = {
+			animationEnabled: true,
+			colorSet: "custom",
+			theme: "dark2", // "light1", "light2", "dark1", "dark2"
 			axisX:{
 				interval: 1,
 			  },
@@ -75,6 +81,9 @@ class Piechart extends Component {
 		}
 
 		const optionsSpring = {
+			animationEnabled: true,
+			colorSet: "custom",
+			theme: "dark2", // "light1", "light2", "dark1", "dark2"
 			axisX:{
 				interval: 1,
 			  },
@@ -105,6 +114,9 @@ class Piechart extends Component {
 		}]
 		}
 		const optionsSummer = {
+			animationEnabled: true,
+			theme: "dark2", // "light1", "light2", "dark1", "dark2"
+			colorSet: "custom",
 			axisX:{
 				interval: 1,
 			  },

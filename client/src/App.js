@@ -19,8 +19,8 @@ class App extends React.Component{
             Tool to find professor reviews and grade distributions.
           </p>
         <Search /> <br></br>
-        <Piechart />
         <DropdownList />
+        <Piechart />
     </div>
   );
   }
