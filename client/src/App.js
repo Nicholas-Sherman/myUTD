@@ -3,6 +3,7 @@ import './App.css';
 import Search from './Components/Search';
 import Piechart from './Components/Graph/Piechart';
 import DropdownList from './Components/DropdownList';
+
 class App extends React.Component{
   constructor(props){
     super(props);
@@ -21,6 +22,7 @@ class App extends React.Component{
         <Search /> <br></br>
         <DropdownList />
         <Piechart />
+
     </div>
   );
   }
