@@ -1,19 +1,27 @@
 import React, { Component } from 'react'
 import Iframe from 'react-iframe'
 import Popup from 'reactjs-popup'
-
+import axios from 'axios'
 class Rmp extends Component {
     constructor(props) {
         super(props);
         this.state = {tid: ''};
     }
     
-componentDidUpdate(prevProps) {
-    if (this.props.tid !== prevProps.tid) {
-        this.setState({tid: this.props.tid})
-    }
-}
-
+async componentDidMount(){
+    try{
+    axios.get(`http://localhost:9000/data`)
+    .then(res => {
+        console.log(res.data[0])
+        this.setState({tid: res.data[0]})
+    })
+  }
+  catch(e)
+  {
+    console.log(e)
+  }
+                        
+};
     render() {       
         return (
             <div className = "rmp">

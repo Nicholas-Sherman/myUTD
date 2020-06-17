@@ -6,15 +6,20 @@ const { promisify } = require('util')
 const sleep = promisify(setTimeout)
 
 router.post('/', function (req, res) {
-  let tid = "";
-  const { name } = req.body;
-  console.log(name)
+  global.tid = "";
+  postData = req.body.name;
+  nameS = postData.split(" ");
+  firstN = nameS[1]
+  lastN = nameS[0]
+ temp = lastN.split(",")
+ lastN = temp[0]
+  fullname = firstN +" "+ lastN
 
   const options = {
     mode: 'text',
     pythonOptions: ['-u'],
     scriptPath: './helpers',
-    args: [name],
+    args: [fullname],
   };
 
   PythonShell.run('RMPClass.py', options, (err, results) => {
@@ -24,6 +29,14 @@ router.post('/', function (req, res) {
     res.send(tid)
    });
 
+});
+
+router.get('/', (req,res,next) => {
+  sleep(4000).then(() => {
+      console.log(tid)
+         res.send(tid)
+  })
+           
 });
 
 

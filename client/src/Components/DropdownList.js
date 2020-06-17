@@ -8,8 +8,6 @@ class DropdownList extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.myRef = React.createRef();
     this.state = {list: [], sub: null, cat: null};
-
-
   }
   async componentDidMount(){
     try{
@@ -26,6 +24,7 @@ class DropdownList extends Component {
 };
 handleChange(event){
   axios.post('http://localhost:9000/testapi',{name: event.target.value,sub: this.state.sub,cat: this.state.cat})
+  axios.post('http://localhost:9000/data',{name: event.target.value})
   window.location.reload(false);
 }
   render() {

@@ -13,9 +13,7 @@ router.post('/', (req, res) => {
     var postData  = req.body.name;
     var cat = req.body.cat;
     var sub = req.body.sub;
-   /* var nameS = postData.split(" ");
-    firstN = nameS[0]
-    lastN = nameS[1]*/
+
 
 
 

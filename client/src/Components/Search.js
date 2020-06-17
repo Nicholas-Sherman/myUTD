@@ -15,11 +15,7 @@ class Search extends Component {
     e.preventDefault();
     axios.post('http://localhost:9000/professorsList',{input: this.state.input})
    axios.delete('http://localhost:9000/testapi')
-    axios.post('http://localhost:9000/data',{name: this.state.input})
-    .then(res => {
-      this.setState({tid: res.data})
-      this.props.setTid(this.state.tid)
-    })
+    window.location.reload(false);
   }
 
   handleChange(event)
