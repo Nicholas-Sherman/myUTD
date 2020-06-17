@@ -17,8 +17,9 @@
 }
 
 .popup {
-  position: relative;
+  position: absolute;
   margin: 0;
+  right:685px;
   padding: 10px;
 }
 

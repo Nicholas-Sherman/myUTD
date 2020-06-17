@@ -18,10 +18,11 @@ class App extends React.Component{
             Tool to find professor reviews and grade distributions.
           </p>
         <Search /> <br></br>
-        <DropdownList />
         <div className= "Popup">
           <Rmp />
         </div><br></br>
+        <DropdownList />
+        
         <Piechart />
     </div>
   );
