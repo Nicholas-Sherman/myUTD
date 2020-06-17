@@ -31,7 +31,7 @@ class Search extends Component {
            <input className= "search-bar"
             type="text"
             ref={this.myRef}
-            placeholder="Search your professor"
+            placeholder="Search your Course Number: ex. CS 3345"
             value={this.state.input}
             onChange={this.handleChange}/>
            </label>
